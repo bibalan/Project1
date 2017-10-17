@@ -96,12 +96,22 @@ vector < vector <float> > blur(vector < vector < float> > grid, float blurring) 
 	float center_prob = 1.0 - blurring;
 	float corner_prob = blurring / 12.0;
 	float adjacent_prob = blurring / 6.0;
-
+	/*
 	vector < vector <float> > window = {
-		{ corner_prob,  adjacent_prob,  corner_prob }, 
-		{ adjacent_prob, center_prob,  adjacent_prob }, 
-		{ corner_prob,  adjacent_prob,  corner_prob } 
+		{ corner_prob,  adjacent_prob,  corner_prob },
+		{ adjacent_prob, center_prob,  adjacent_prob },
+		{ corner_prob,  adjacent_prob,  corner_prob }
 	};
+	*/
+
+	vector < vector <float> > window (height, vector<float> (width, corner_prob));
+
+	window[1][1] = center_prob;
+
+	window[0][1] = adjacent_prob;
+	window[1][0] = adjacent_prob;
+	window[1][2] = adjacent_prob;
+	window[2][1] = adjacent_prob;
 
 	float grid_val=0.0,mult = 0.0;
 	int new_i = 0, new_j = 0;
