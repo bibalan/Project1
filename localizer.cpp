@@ -160,8 +160,30 @@ vector< vector <float> > move(int dy, int dx,
 	// your code here
 	int height = beliefs.size();
 	int width = beliefs[0].size();
+	int i = 0, j = 0, new_i, new_j;
 	vector < vector <float> > newGrid(height,vector<float>(width,0.0));
 	//newGrid = beliefs;
+
+	for (i = 0; i < height; i++)
+	{
+		for (j = 0; j < width; j++)
+		{
+			// new index for i
+			new_i = i + dx;
+			if (new_i >= height)
+				new_i -= height;
+			if (new_i < 0)
+				new_i += height;
+			// new index for j
+			new_j = j + dy;
+			if (new_j >= width)
+				new_j -= width;
+			if (new_j < 0)
+				new_j += width;
+			newGrid[new_i][new_j] = beliefs[i][j];
+		}
+	}
+
 
 	return blur(newGrid, blurring);
 }
